@@ -1,0 +1,87 @@
+/**
+ * init Select2 over specific selectors
+ * If you pass specificSelector, only apply select2 over that selector elsewhere apply to all that has class select2-autocomplete => $('.select2-autocomplete');
+ *
+ * @param specificSelector
+ */
+function initSelect2(specificSelector) {
+    var onlySpecificSelector = $(specificSelector).find('.select2-autocomplete');
+    var selectorWhereInitSelect2 = '';
+    if (onlySpecificSelector.length == 1) {
+        selectorWhereInitSelect2 = onlySpecificSelector;
+    }
+    else {
+        selectorWhereInitSelect2 = $('.select2-autocomplete');
+    }
+    selectorWhereInitSelect2.each(function (i, e) {
+        var select = $(e);
+        var defaultValue = select.val();
+        var sourcePath = select.data('source');
+
+        options = {};
+        options.width = 'auto';
+        options.allowClear = true;
+        options.placeholder = "Seleccione una opción";
+
+        var initSelectionForSingle = function (select, callback) {
+            if (defaultValue !== "") {
+                $.ajax(sourcePath, {
+                    data: {
+                        q_id: defaultValue
+                    },
+                    dataType: "json"
+                }).done(function (data) {
+                    data = {id: data[0].id, text: data[0].text};
+                    callback(data);
+                });
+            }
+        };
+
+        var initSelectionForMultiple = function (select, callback) {
+            select.val().split(",").each(function () {
+                data.push({id: this, text: this});
+            });
+            callback(data);
+        };
+
+        var data = [];
+        if (typeof select.data('multiple') !== 'undefined') { //multiple select with multiple=>true option
+            options.multiple = select.data('multiple');
+            if (options.multiple == true) {
+                options.initSelection = initSelectionForMultiple;
+            } else { //single select with multiple=>false option
+                options.initSelection = initSelectionForSingle;
+            }
+        }
+        else { // undefined -> single select by default
+            options.initSelection = initSelectionForSingle;
+        }
+
+        if (select.hasClass('ajax')) {
+            options.ajax = {
+                url: sourcePath,
+                dataType: 'json',
+                data: function (term, page) {
+                    return { q: term, page: page, per: 10 }
+                },
+                results: function (data, page) {
+                    return { results: data }
+                }
+            }
+        }
+
+        options.formatNoMatches = function (term) {
+            var destinationSelectorId=select.attr('id')
+            var modalPath = "'" + select.data('modal') + "/" + encodeURI(term)+"/"+encodeURI(destinationSelectorId) +"'";
+            return '<a href="#" class="btn btn-xs btn-primary add-item-button pull-right" onclick="return fancybox(' + modalPath + ');">Agregar y editar: "' + term + '"</a>';
+        };
+        options.escapeMarkup = function (m) {
+            return m;
+        };
+        select.select2(options);
+    })
+}
+
+function setSelectResult(destinationField, key, value) {
+    $(destinationField).select2('data', {id: key, text: value});
+}
