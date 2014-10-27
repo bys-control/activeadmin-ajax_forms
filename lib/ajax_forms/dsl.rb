@@ -25,7 +25,7 @@ module ActiveAdminAjaxForms
           params[:q]={:id_equals => params[:q_id]}
         end
         @q = @model.search(params[:q])
-        @items = @q.result.map { |item| {:id => item.id, :text => item.name} }
+        @items = @q.result.map { |item| {:id => item.id, :text => item.to_s} }
         respond_to do |format|
           format.json { render :json => @items }
         end
