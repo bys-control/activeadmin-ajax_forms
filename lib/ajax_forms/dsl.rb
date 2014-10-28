@@ -4,12 +4,11 @@ module ActiveAdminAjaxForms
 
     #todo: falta completar el pasaje de opciones de configuracion para especificar los partials a renderizar
     def ajax_forms options={}
-      #binding.pry
-
       default_options = {
-        quick_new_partial: nil,
-        quick_create_partial: nil,
-        model: config.resource_class
+          quick_new_partial: nil,
+          quick_create_partial: nil,
+          model: config.resource_class,
+          find_conditions: {:m => "or", :per => 30, :find_fields => [:name_contains]}
       }
 
       options = default_options.deep_merge(options)
@@ -20,11 +19,14 @@ module ActiveAdminAjaxForms
       collection_action :find, :method => :get do
         @model = resource_class
         if params[:q_id].blank?
-          params[:q]={:name_contains => params[:q]}
+          search_term=params[:q]
+          params[:q]={:m => options[:find_conditions][:m], :per => options[:find_conditions][:per]}
+          params[:q].merge!(Hash[options[:find_conditions][:find_fields].collect { |k| [k, search_term] }])
         else
-          params[:q]={:id_equals => params[:q_id]}
+          params[:q]={:id_equals => params[:q_id]} #compatibility with view
         end
         @q = @model.search(params[:q])
+
         @items = @q.result.map { |item| {:id => item.id, :text => item.to_s} }
         respond_to do |format|
           format.json { render :json => @items }
