@@ -9,16 +9,21 @@ Gem::Specification.new do |s|
   s.version     = AjaxForms::VERSION
   s.authors     = ["Guillermo Bisheimer, Christian Pfarher"]
   s.email       = ["gbisheimer@bys-control.com.ar, c.pfarher@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/bys-control/activeadmin-ajax_forms"
   s.summary     = "Allow fast creation of records using ajax forms"
-  s.description = "Allow fast creation of records using ajax forms"
+  s.description = "Allow fast creation of records using modal forms submitted using AJAX"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.1.5"
-  s.add_dependency "activeadmin", ">= 0"
+  s.add_dependency "rails", "~> 4"
+  s.add_dependency "activeadmin", "~> 0"
 
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "jquery", "~> 0"
+  s.add_dependency "select2-rails", "~> 3.5"
+  s.add_dependency "fancybox2-rails", "~> 0.2"
+  s.add_dependency "activeadmin-select2", "~> 0.1"
+
+  s.add_development_dependency "sqlite3", "~> 0"
 end
