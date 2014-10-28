@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4"
-  s.add_dependency "activeadmin", "~> 0"
+  #s.add_dependency "activeadmin", "~> 0"
 
   s.add_dependency "jquery", "~> 0"
   s.add_dependency "select2-rails", "~> 3.5"
