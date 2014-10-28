@@ -12,7 +12,7 @@ Pasos para usarla
 ```
 #!ruby
 
-gem 'ajax_forms', path: 'engines/ajax_forms'
+gem 'ajax_forms', github: 'bys-control/activeadmin-ajax_forms'
 ```
 * Agregar al active_admin.js.cofee de la app host:
 
