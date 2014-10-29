@@ -8,9 +8,7 @@ module ActiveAdminAjaxForms
           quick_new_partial: nil,
           quick_create_partial: nil,
           model: config.resource_class,
-          find_conditions: {:m => "or", :per => 30, :find_fields => [:name_contains]}
       }
-
       options = default_options.deep_merge(options)
 
       @ajax_form_enabled = true
@@ -18,15 +16,17 @@ module ActiveAdminAjaxForms
       #todo: Posibilidad de especificar los atributos a devolver en el método find. Si no se especifica nada devolver todas las columnas
       collection_action :find, :method => :get do
         @model = resource_class
-        if params[:q_id].blank?
-          search_term=params[:q]
-          params[:q]={:m => options[:find_conditions][:m], :per => options[:find_conditions][:per]}
-          params[:q].merge!(Hash[options[:find_conditions][:find_fields].collect { |k| [k, search_term] }])
-        else
-          params[:q]={:id_equals => params[:q_id]} #compatibility with view
-        end
-        @q = @model.search(params[:q])
+        search_term=params[:q]
 
+        groupping_condition=params[:q][:g] rescue nil
+
+        if !params[:q_id].blank?
+          params[:q]={:id_equals => params[:q_id]} #selected element
+        elsif groupping_condition.nil?
+          params[:q]={:per=>50, :g=>{"0"=>{:name_contains=>search_term}}}
+        end
+
+        @q = @model.search(params[:q])
         @items = @q.result.map { |item| {:id => item.id, :text => item.to_s} }
         respond_to do |format|
           format.json { render :json => @items }

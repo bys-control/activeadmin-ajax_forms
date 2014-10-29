@@ -47,7 +47,7 @@ function initSelect2(specificSelector) {
         var data = [];
         if (typeof select.data('multiple') !== 'undefined') { //multiple select with multiple=>true option
             options.multiple = select.data('multiple');
-            if (options.multiple == true) {
+            if (options.multiple == true) { 
                 options.initSelection = initSelectionForMultiple;
             } else { //single select with multiple=>false option
                 options.initSelection = initSelectionForSingle;
@@ -62,7 +62,10 @@ function initSelect2(specificSelector) {
                 url: sourcePath,
                 dataType: 'json',
                 data: function (term, page) {
-                    return { q: term, page: page, per: 10 }
+                    return {
+                        q: term,
+                        page: page,
+                        per: 10 }
                 },
                 results: function (data, page) {
                     return { results: data }
