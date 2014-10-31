@@ -58,17 +58,20 @@ function initSelect2(specificSelector) {
         }
 
         if (select.hasClass('ajax')) {
+            options.minimumInputLengt=3;
             options.ajax = {
                 url: sourcePath,
                 dataType: 'json',
                 data: function (term, page) {
                     return {
                         q: term,
-                        page: page,
-                        per: 10 }
+                        page_limit: page,
+                        page: page }
                 },
                 results: function (data, page) {
-                    return { results: data }
+                    return {
+                        results: data
+                    }
                 }
             }
         }

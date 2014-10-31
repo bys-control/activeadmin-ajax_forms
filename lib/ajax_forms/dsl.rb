@@ -23,11 +23,11 @@ module ActiveAdminAjaxForms
         if !params[:q_id].blank?
           params[:q]={:id_equals => params[:q_id]} #selected element
         elsif groupping_condition.nil?
-          params[:q]={:per=>50, :g=>{"0"=>{:name_contains=>search_term}}}
+          params[:q]={:g=>{"0"=>{:name_cont=>search_term}}}
         end
 
         @q = @model.search(params[:q])
-        @items = @q.result.map { |item| {:id => item.id, :text => item.to_s} }
+        @items = @q.result.order('name asc').limit(100).map { |item| {:id => item.id, :text => item.to_s} }
         respond_to do |format|
           format.json { render :json => @items }
         end
