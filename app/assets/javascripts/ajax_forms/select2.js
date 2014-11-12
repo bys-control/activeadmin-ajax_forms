@@ -1,3 +1,6 @@
+function addslashes( str ) {
+    return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+}
 /**
  * init Select2 over specific selectors
  * If you pass specificSelector, only apply select2 over that selector elsewhere apply to all that has class select2-autocomplete => $('.select2-autocomplete');
@@ -78,7 +81,8 @@ function initSelect2(specificSelector) {
 
         options.formatNoMatches = function (term) {
             var destinationSelectorId=select.attr('id')
-            var modalPath = "'" + select.data('modal') + "/" + encodeURI(term)+"/"+encodeURI(destinationSelectorId) +"'";
+            console.log(term);
+            var modalPath = "'" + select.data('modal') + "/" + escape(term)+"/"+encodeURI(destinationSelectorId) +"'";
             return '<a href="#" class="btn btn-xs btn-primary add-item-button pull-right" onclick="return fancybox(' + modalPath + ');">Agregar y editar: "' + term + '"</a>';
         };
         options.escapeMarkup = function (m) {
