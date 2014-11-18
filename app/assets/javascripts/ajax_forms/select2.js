@@ -60,8 +60,10 @@ function initSelect2(specificSelector) {
             options.initSelection = initSelectionForSingle;
         }
 
+        options.minimumInputLength=3;
+        options.quietMillis= 1500;
+
         if (select.hasClass('ajax')) {
-            options.minimumInputLengt=3;
             options.ajax = {
                 url: sourcePath,
                 dataType: 'json',
