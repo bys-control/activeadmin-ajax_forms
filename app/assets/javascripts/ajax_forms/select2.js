@@ -1,6 +1,11 @@
 function addslashes( str ) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
+
+function setSelectResult(destinationField, key, value) {
+    $(destinationField).select2('data', {id: key, text: value});
+}
+
 /**
  * init Select2 over specific selectors
  * If you pass specificSelector, only apply select2 over that selector elsewhere apply to all that has class select2-autocomplete => $('.select2-autocomplete');
@@ -50,7 +55,7 @@ function initSelect2(specificSelector) {
         var data = [];
         if (typeof select.data('multiple') !== 'undefined') { //multiple select with multiple=>true option
             options.multiple = select.data('multiple');
-            if (options.multiple == true) { 
+            if (options.multiple == true) {
                 options.initSelection = initSelectionForMultiple;
             } else { //single select with multiple=>false option
                 options.initSelection = initSelectionForSingle;
@@ -71,18 +76,19 @@ function initSelect2(specificSelector) {
                     return {
                         q: term,
                         page_limit: page,
-                        page: page }
+                        page: page
+                    }
                 },
                 results: function (data, page) {
                     return {
                         results: data
                     }
                 }
-            }
+            };
         }
 
         options.formatNoMatches = function (term) {
-            var destinationSelectorId=select.attr('id')
+            var destinationSelectorId=select.attr('id');
             var modalPath = "'" + select.data('modal') + "/" + escape(encodeURIComponent(term))+"/"+encodeURI(destinationSelectorId) +"'";
             return '<a href="#" class="btn btn-xs btn-primary add-item-button pull-right" onclick="return fancybox(' + modalPath + ');">Agregar y editar: "' + term + '"</a>';
         };
@@ -90,9 +96,5 @@ function initSelect2(specificSelector) {
             return m;
         };
         select.select2(options);
-    })
-}
-
-function setSelectResult(destinationField, key, value) {
-    $(destinationField).select2('data', {id: key, text: value});
+    });
 }

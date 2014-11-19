@@ -12,7 +12,7 @@ function fancybox(href) {
             'transitionIn': 'elastic',
             'ajax': {
                 complete: function(jqXHR, textStatus) {
-                    initSelect2($('div.fancybox-skin'))
+                    initSelect2($('div.fancybox-skin'));
                 }
             }
         }
