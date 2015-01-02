@@ -53,8 +53,7 @@ module ActiveAdminAjaxForms
       end
 
       collection_action :quick_create, :method => :post do
-        resource_name=resource_class.to_s.downcase
-        @model = resource_class.new(params[resource_name])
+        @model = resource_class.new(params[resource_instance_name])
         @selector=options[:selector]
         @model.save
         @id=options[:id]
