@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "jquery", "~> 0"
   s.add_dependency "select2-rails"
+  s.add_dependency 'chosen-rails', "~> 1.2.0"
   s.add_dependency "fancybox2-rails", "~> 0.2.8"
   s.add_dependency "activeadmin-select2"
   s.add_dependency "will_paginate", "~> 3.0.4"

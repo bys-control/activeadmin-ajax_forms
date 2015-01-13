@@ -13,6 +13,12 @@ function fancybox(href) {
             'ajax': {
                 complete: function(jqXHR, textStatus) {
                     initSelect2($('div.fancybox-skin'));
+                    $(".chosen-input").chosen({
+                        no_results_text: "No se han encontrado resultados...",
+                        allow_single_deselect: true,
+                        placeholder_text_single: "Seleccione una opción",
+                        search_contains: true
+                    });
                 }
             }
         }
