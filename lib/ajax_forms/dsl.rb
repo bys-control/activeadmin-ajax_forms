@@ -34,7 +34,7 @@ module ActiveAdminAjaxForms
       end
 
       collection_action :quick_new, :method => :get do
-        @model = resource_class.new(:name => URI.decode(params[:name]))
+        @model = resource_class.new(:name => Base64.decode64(params[:name]))
         options[:selector]=params[:selectorid]
         #crea una variable de instancia con el nombre del recurso para compatibilidad con partials normales
         instance_variable_set("@#{resource_instance_name.to_s}", @model)

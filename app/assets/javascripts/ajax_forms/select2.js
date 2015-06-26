@@ -89,7 +89,7 @@ function initSelect2(specificSelector) {
 
         options.formatNoMatches = function (term) {
             var destinationSelectorId=select.attr('id');
-            var modalPath = "'" + select.data('modal') + "/" + escape(encodeURIComponent(term))+"/"+encodeURI(destinationSelectorId) +"'";
+            var modalPath = "'" + select.data('modal') + "/" + btoa(term)+"/"+encodeURI(destinationSelectorId) +"'";
             return '<a href="#" class="btn btn-xs btn-primary add-item-button pull-right" onclick="return fancybox(' + modalPath + ');">Agregar y editar: "' + term + '"</a>';
         };
         options.escapeMarkup = function (m) {
