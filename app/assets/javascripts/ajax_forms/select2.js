@@ -66,10 +66,9 @@ function initSelect2(specificSelector) {
         }
 
         //options.minimumInputLength=3;
-        options.quietMillis= 1500;
-
         if (select.hasClass('ajax')) {
             options.ajax = {
+                quietMillis: 1500,
                 url: sourcePath,
                 dataType: 'json',
                 data: function (term, page) {
