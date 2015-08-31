@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Guillermo Bisheimer, Christian Pfarher"]
   s.email       = ["gbisheimer@bys-control.com.ar, c.pfarher@gmail.com"]
   s.homepage    = "https://github.com/bys-control/activeadmin-ajax_forms"
-  s.summary     = "Allow fast creation of records using ajax forms"
-  s.description = "Allow fast creation of records using modal forms submitted using AJAX"
+  s.summary     = "Allow search and fast creation of records on html selectors using ajax forms in ActiveAdmin with formtastic"
+  s.description = "Allow search and fast creation of records in selectors (by select2 plugin) in ActiveAdmin with Formtastic. It useg modal forms for new records submitted using AJAX"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
