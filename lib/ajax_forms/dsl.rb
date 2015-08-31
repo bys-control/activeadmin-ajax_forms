@@ -17,13 +17,17 @@ module ActiveAdminAjaxForms
       collection_action :find, :method => :get do
         @model = resource_class
         search_term=params[:q]
-
         groupping_condition=params[:q][:g] rescue nil
 
         if !params[:q_id].blank?
           params[:q]={:id_equals => params[:q_id]} #selected element
         elsif groupping_condition.nil?
-          params[:q]={:g=>{"0"=>{:name_cont_all=>search_term.split(" ")}}}
+          params[:q]={
+            :g=>{
+              "0"=>{:name_cont_all=>search_term.split(" ")}
+            }
+          }
+          params[:q][:g]["1"]={params[:dependentSelect][:ransackFilter].to_sym=>params[:dependentSelect][:selectorValue]} if params[:dependentSelect] and !params[:dependentSelect][:selectorValue].empty?
         end
 
         @q = @model.search(params[:q])

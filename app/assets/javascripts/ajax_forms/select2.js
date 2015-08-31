@@ -25,6 +25,7 @@ function initSelect2(specificSelector) {
         var select = $(e);
         var defaultValue = select.val();
         var sourcePath = select.data('source');
+        var dependent = select.data("dependent");
 
         options = {};
         options.width = 'auto';
@@ -72,10 +73,20 @@ function initSelect2(specificSelector) {
                 url: sourcePath,
                 dataType: 'json',
                 data: function (term, page) {
+                    selectorValue="";
+                    ransackFilter="";
+                    dependentField=select.data("dependent");
+                    dependentSelectHash={}
+                    if (dependentField) {
+                        selectorValue=$("#"+dependentField.selectorId).val();
+                        ransackFilter=dependentField.ransackFilter;
+                        dependentSelectHash={"ransackFilter": ransackFilter, "selectorValue": selectorValue};
+                    }
                     return {
                         q: term,
                         page_limit: page,
-                        page: page
+                        page: page,
+                        dependentSelect: dependentSelectHash
                     }
                 },
                 results: function (data, page) {
