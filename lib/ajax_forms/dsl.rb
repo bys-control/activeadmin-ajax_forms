@@ -8,30 +8,45 @@ module ActiveAdminAjaxForms
           quick_new_partial: nil,
           quick_create_partial: nil,
           model: config.resource_class,
+          search_fields: ['name'],
+          display_column: 'name',
+          search_condition: 'cont_all'
       }
       options = default_options.deep_merge(options)
 
       @ajax_form_enabled = true
 
+      # XXX: usar reflect on association para definir los collection_actions en los modelos
+      # relacionados donde se quieren buscar los datos
+      # Por ejemplo, si product belongs_to invoice_line, y quiero crear dinámicamente un producto
+      # solo hace falta definir en invoice_line que se quiere usar ajax_forms. Automáticamente
+      # se crean los collection_actions en products para realizar las búsquedas.
+
       #todo: Posibilidad de especificar los atributos a devolver en el método find. Si no se especifica nada devolver todas las columnas
       collection_action :find, :method => :get do
-        @model = resource_class
-        search_term=params[:q]
-        groupping_condition=params[:q][:g] rescue nil
+        model = resource_class
+        search_term = params[:q]
+        groupping_condition = params[:q][:g] rescue nil
+        ransack_search = options[:search_fields].join('_or_').concat('_').concat(options[:search_condition]).to_sym
 
-        if !params[:q_id].blank?
+        if params[:q_id].present?
           params[:q]={:id_equals => params[:q_id]} #selected element
         elsif groupping_condition.nil?
           params[:q]={
             :g=>{
-              "0"=>{:name_cont_all=>search_term.split(" ")}
+              "0"=>{:ransak_search=>search_term.split(" ")}
             }
           }
-          params[:q][:g]["1"]={params[:dependentSelect][:ransackFilter].to_sym=>params[:dependentSelect][:selectorValue]} if params[:dependentSelect] and !params[:dependentSelect][:selectorValue].empty?
+
+          # if this search depends on the result of another select box
+          # we need to add the filter to the existing ransack options
+          if params[:dependentSelect] and !params[:dependentSelect][:selectorValue].empty?
+            params[:q][:g]["1"]={params[:dependentSelect][:ransackFilter].to_sym=>params[:dependentSelect][:selectorValue]}
+          end
         end
 
-        @q = @model.search(params[:q])
-        @items = @q.result.order('id desc', 'name asc').limit(100).map { |item| {:id => item.id, :text => item.to_s} }
+        q = model.search(params[:q])
+        @items = q.result.order('id asc', 'name asc').limit(100).map { |item| {:id => item.id, :text => item.to_s} }
         respond_to do |format|
           format.json { render :json => @items }
         end
