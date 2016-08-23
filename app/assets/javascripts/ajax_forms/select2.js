@@ -12,7 +12,7 @@ function setSelectResult(destinationField, key, value) {
  *
  * @param specificSelector
  */
-function initSelect2(specificSelector) {
+function initSelect2Autocomplete(specificSelector) {
     var onlySpecificSelector = $(specificSelector).find('.select2-autocomplete');
     var selectorWhereInitSelect2 = '';
     if (onlySpecificSelector.length == 1) {

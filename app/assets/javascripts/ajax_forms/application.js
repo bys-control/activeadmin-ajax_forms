@@ -13,5 +13,5 @@
 //= require_tree .
 
 $(function () {
-    initSelect2();
+    initSelect2Autocomplete();
 });
