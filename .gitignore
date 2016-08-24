@@ -35,5 +35,6 @@ test/dummy/.sass-cache
 .idea
 
 # Added by webpack-rails
+!webpack/build
 /node_modules
 /public/webpack
