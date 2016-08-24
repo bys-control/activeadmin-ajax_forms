@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 users = [
-    { email: 'admin@example.com', password: 'administrator', password_confirmation: 'administrator'},
+    { email: 'admin@example.com', password: 'password', password_confirmation: 'password'},
 ]
 
 users.each do |v|
   user_created = AdminUser.where(email: v[:email]).first_or_initialize(v)
   if user_created.valid? && user_created.new_record?
     user_created.save!
-    puts "Usuario #{user_created.email} creado con pass: #{user_created.password}"
+    puts "User created! email: #{user_created.email} - password: #{user_created.password}"
   end
 end
