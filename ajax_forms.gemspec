@@ -18,13 +18,14 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 4"
-  #s.add_dependency "activeadmin", "~> 0"
+  s.add_dependency "activeadmin", ">= 1.0.0.pre4"
 
-  s.add_dependency "jquery", "~> 0"
-  s.add_dependency "select2-rails", '>= 3.5.9.1'
-  s.add_dependency 'chosen-rails', '~> 1.2', '>= 1.2.0' #, group: :assets
-  s.add_dependency 'fancybox2-rails', '~> 0.2.8'
-  s.add_dependency "activeadmin-select2"
-  s.add_dependency 'will_paginate', '~> 3.0', '>= 3.0.4'
-  s.add_development_dependency "sqlite3", "~> 0"
+  s.add_dependency 'kaminari', '~> 0.17.0'
+  s.add_dependency 'ransack', '~> 1.8.2'
+
+  s.add_development_dependency "sqlite3", "~> 1.3.11"
+  s.add_development_dependency "devise"
+  s.add_development_dependency "pry"
+  s.add_development_dependency "pry-byebug"
+
 end
