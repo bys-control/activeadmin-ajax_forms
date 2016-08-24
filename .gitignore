@@ -33,3 +33,7 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 
 .idea
+
+# Added by webpack-rails
+/node_modules
+/public/webpack

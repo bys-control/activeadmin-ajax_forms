@@ -19,13 +19,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 4"
   s.add_dependency "activeadmin", ">= 1.0.0.pre4"
-
   s.add_dependency 'kaminari', '~> 0.17.0'
   s.add_dependency 'ransack', '~> 1.8.2'
+  s.add_dependency 'webpack-rails', '~> 0.9.9'
 
   s.add_development_dependency "sqlite3", "~> 1.3.11"
-  s.add_development_dependency "devise"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "pry-byebug"
+  s.add_development_dependency "devise", "~> 4.2.0"
+  s.add_development_dependency "pry", "~> 0.10.4"
+  s.add_development_dependency "pry-byebug", "~> 3.4.0"
+  s.add_development_dependency 'foreman'
 
 end
