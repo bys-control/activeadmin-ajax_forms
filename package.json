@@ -2,10 +2,23 @@
   "name": "webpack-rails-example",
   "version": "0.0.1",
   "license": "MIT",
+  "scripts": {
+    "dev": "node webpack/build/dev-server.js",
+    "build": "node webpack/build/build.js",
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+  },
   "dependencies": {
     "babel-runtime": "^6.0.0",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
-    "stats-webpack-plugin": "^0.2.1"
+    "jquery-ui": "^1.12.0",
+    "lodash": "^4.15.0",
+    "numeral": "^1.5.3",
+    "stats-webpack-plugin": "^0.2.1",
+    "vue": "^2.0.0-rc.3",
+    "vue-strap": "^1.0.11",
+    "vuex": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -42,7 +55,6 @@
     "imports-loader": "^0.6.5",
     "inject-loader": "^2.0.1",
     "isparta-loader": "^2.0.0",
-    "jquery": "^3.1.0",
     "json-loader": "^0.5.4",
     "karma": "^0.13.15",
     "karma-coverage": "^0.5.5",
@@ -69,6 +81,10 @@
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^9.4.0",
+    "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.9.0",
     "webpack-dev-middleware": "^1.6.1",

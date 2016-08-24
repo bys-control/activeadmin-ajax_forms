@@ -4,5 +4,5 @@ console.log('Global JQuery version: ' + $.fn.jquery)
 
 $ ->
   hostname = window.location.hostname.toString()
-  script = '<script src="http://' + hostname + ':3808/webpack/application.js"></script>'
+  script = '<script src="http://' + hostname + ':8080/app.js"></script>'
   $('body').append($(script))
