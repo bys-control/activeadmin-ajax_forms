@@ -5,6 +5,7 @@ var utils = require('./utils')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var NpmInstallPlugin = require('npm-install-webpack-plugin')
+var StatsPlugin = require('stats-webpack-plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -31,6 +32,15 @@ module.exports = merge(baseWebpackConfig, {
       template: './webpack/index.html',
       inject: true
     }),
-    new NpmInstallPlugin()
+    new NpmInstallPlugin(),
+    // must match config.webpack.manifest_filename
+    new StatsPlugin('manifest.json', {
+      // We only need assetsByChunkName
+      chunkModules: false,
+      source: false,
+      chunks: false,
+      modules: false,
+      assets: true
+    })
   ]
 })
