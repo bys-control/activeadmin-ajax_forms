@@ -20,7 +20,5 @@ console.log('Webpack vue version: ' + Vue.version)
 /* eslint-disable no-new */
 new Vue({
   el: 'div#main_content',
-  components: {
-    App
-  }
+  render: h => h(App)
 })
