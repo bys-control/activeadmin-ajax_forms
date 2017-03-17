@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 4"
-  s.add_dependency "activeadmin", ">= 1.0.0.pre4"
+  s.add_dependency "activeadmin"
   s.add_dependency 'kaminari', '~> 0.17.0'
   s.add_dependency 'ransack', '~> 1.8.2'
   s.add_dependency 'webpack-rails', '~> 0.9.9'

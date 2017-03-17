@@ -69,7 +69,7 @@ function initSelect2Autocomplete(specificSelector) {
         //options.minimumInputLength=3;
         if (select.hasClass('ajax')) {
             options.ajax = {
-                quietMillis: 1500,
+                quietMillis: 500,
                 url: sourcePath,
                 dataType: 'json',
                 data: function (term, page) {
