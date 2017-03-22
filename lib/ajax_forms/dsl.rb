@@ -34,7 +34,7 @@ module ActiveAdminAjaxForms
         elsif groupping_condition.nil?
           params[:q]={
             :g=>{
-              "0"=>{:ransak_search=>search_term.split(" ")}
+              "0"=>{ransack_search=>search_term.split(" ")}
             }
           }
 
