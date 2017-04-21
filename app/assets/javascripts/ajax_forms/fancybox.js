@@ -12,7 +12,7 @@ function fancybox(href) {
             'transitionIn': 'elastic',
             'ajax': {
                 complete: function(jqXHR, textStatus) {
-                    initSelect2($('div.fancybox-skin'));
+                    initSelect2Autocomplete($('div.fancybox-skin'));
                     $(".chosen-input").chosen({
                         no_results_text: "No se han encontrado resultados...",
                         allow_single_deselect: true,
