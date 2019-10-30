@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'webpack-rails', '~> 0.9.9'
 
   s.add_development_dependency "sqlite3", "~> 1.3.11"
-  s.add_development_dependency "devise", "~> 4.2.0"
+  s.add_development_dependency "devise", "~> 4.7.1"
   s.add_development_dependency "pry", "~> 0.10.4"
   s.add_development_dependency "pry-byebug", "~> 3.4.0"
   s.add_development_dependency 'foreman'
